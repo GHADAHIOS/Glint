@@ -1,7 +1,18 @@
-//
-//  BreathingSession.swift
-//  Glint
-//
-//  Created by Renad Alotaibi on 07/11/1446 AH.
-//
 
+
+//Done by Hajar ⭐️
+
+import Foundation
+
+struct BreathingSession {
+    enum BreathingPhase: String {
+        case breatheIn = "Breathe In"
+        case breatheOut = "Breathe Out"
+    }
+
+    var currentPhase: BreathingPhase = .breatheIn
+
+    mutating func togglePhase() {
+        currentPhase = (currentPhase == .breatheIn) ? .breatheOut : .breatheIn
+    }
+}

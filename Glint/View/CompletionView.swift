@@ -31,4 +31,3 @@ struct CompletionView: View {
         .padding()
     }
 }
-
