@@ -75,14 +75,15 @@ struct GroundingView: View {
                     }) {
                         Text("Next step")
                             .font(.system(size: 16, weight: .semibold))
-                            .frame(maxWidth: .infinity)
+                            .frame(width: 180, height: 20)
                             .padding()
                             .background(isStepFilled ? Color("Button"): Color.gray.opacity(0.3))
-                            .foregroundColor(.white)
+                            .foregroundColor(Color("Textlight"))
                             .cornerRadius(12)
                     }
                     .disabled(!isStepFilled)
                     .padding(.horizontal)
+                    .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.top, 10)
 
                     Spacer()
