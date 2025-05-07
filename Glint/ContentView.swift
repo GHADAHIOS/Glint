@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  Glint
-//
-//  Created by GHADAH ALENEZI on 06/11/1446 AH.
-//
-
 import SwiftUI
 import SwiftData
 
@@ -12,33 +5,27 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
 
+    @State private var showSplash = true
+
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
-                }
-                .onDelete(perform: deleteItems)
+        ZStack {
+            if showSplash {
+                SplashView()
+                    .transition(.opacity)
+            } else {
+                //MainHomeView()
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
+        }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                withAnimation {
+                    showSplash = false
                 }
             }
-        } detail: {
-            Text("Select an item")
         }
     }
 
+    // إذا أردت لاحقًا استخدام SwiftData
     private func addItem() {
         withAnimation {
             let newItem = Item(timestamp: Date())
