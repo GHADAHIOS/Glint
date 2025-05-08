@@ -18,13 +18,13 @@ struct TimeUpView: View {
 
             // الكارد الرئيسي
             VStack(spacing: 24) {
-                Text("Time’s up 🙁")
+                Text("Time’s up ☹️")
                     .font(.system(size: 28, weight: .bold))
-                    .foregroundColor(Color("TextH2"))
+                    .foregroundColor(Color("Button"))
 
                 Text("Deep breaths, you can try again\nwhenever you’re ready")
                     .font(.system(size: 16))
-                    .foregroundColor(Color("TextH2"))
+                    .foregroundColor(Color("Button"))
                     .multilineTextAlignment(.center)
                     .lineSpacing(4)
 
@@ -51,7 +51,7 @@ struct TimeUpView: View {
                 }
             }
             .padding(32)
-            .background(Color("lightpurple"))
+            .background(Color("candypurple"))
             .cornerRadius(24)
             .padding(.horizontal, 24)
         }
