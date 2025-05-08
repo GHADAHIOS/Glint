@@ -26,19 +26,19 @@ struct CompletionView: View {
                 // العنوان
                 Text("Well Done! 🎉")
                     .font(.system(size: 28, weight: .bold))
-                    .foregroundColor(Color("TextH2"))
+                    .foregroundColor(Color("Button"))
 
                 // الوصف
                 Text("You showed up for yourself\nThat’s brave & beautiful")
                     .font(.system(size: 16))
-                    .foregroundColor(Color("TextH2"))
+                    .foregroundColor(Color("Button"))
                     .multilineTextAlignment(.center)
                     .lineSpacing(4)
 
                 // تشجيع إضافي
                 Text("Keep going")
                     .font(.system(size: 14))
-                    .foregroundColor(Color("TextH2"))
+                    .foregroundColor(Color("Button"))
 
                 // أزرار الإجراءات
                 HStack(spacing: 16) {
@@ -64,7 +64,7 @@ struct CompletionView: View {
                 }
             }
             .padding(32)
-            .background(Color("lightpurple"))
+            .background(Color("candypurple"))
             .cornerRadius(24)
             .padding(.horizontal, 24)
         }
