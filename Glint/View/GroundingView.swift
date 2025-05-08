@@ -62,12 +62,12 @@ struct GroundingView: View {
                         viewModel.submitStep()
                     }) {
                         Text("Next step")
-                            .font(.system(size: 16, weight: .semibold))
+                            .font(.system(size: 20, weight: .medium, design:.rounded))
                             .frame(width: 180, height: 20)
                             .padding()
                             .background(isStepFilled ? Color("Button"): Color.gray.opacity(0.3))
                             .foregroundColor(Color("Textlight"))
-                            .cornerRadius(12)
+                            //.cornerRadius(12)
                     }
                     .disabled(!isStepFilled)
                     .padding(.horizontal)
