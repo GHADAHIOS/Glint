@@ -94,6 +94,11 @@ class GroundingViewModel: ObservableObject {
         self.answers = steps.map { Array(repeating: "", count: $0.count) }
         startTimer()
     }
+    func goBack() {
+        if currentStepIndex > 0 {
+            currentStepIndex -= 1
+        }
+    }
 }
 
 
