@@ -7,29 +7,66 @@
 
 import SwiftUI
 import EffectsLibrary
-
 struct CompletionView: View {
     var onHome: () -> Void
     var onTryAnother: () -> Void
 
     var body: some View {
-        VStack(spacing: 20) {
+        ZStack {
+            // خلفية بيضاء كاملة
+            Color.white
+                .ignoresSafeArea()
+
+            // تأثير الألعاب النارية في الخلفية
             FireworksView()
-            Text("Well Done! 🎉")
-                .font(.title)
+                .ignoresSafeArea()
 
-            Text("You showed up for yourself\nThat's brave & beautiful")
-                .multilineTextAlignment(.center)
+            // الكارد الأمامي
+            VStack(spacing: 24) {
+                // العنوان
+                Text("Well Done! 🎉")
+                    .font(.system(size: 28, weight: .bold))
+                    .foregroundColor(Color("TextH2"))
 
-            Button("Try another", action: onTryAnother)
-                .padding()
-                .background(Color.purple)
-                .foregroundColor(.white)
-                .cornerRadius(10)
+                // الوصف
+                Text("You showed up for yourself\nThat’s brave & beautiful")
+                    .font(.system(size: 16))
+                    .foregroundColor(Color("TextH2"))
+                    .multilineTextAlignment(.center)
+                    .lineSpacing(4)
 
-            Button("Home", action: onHome)
-                .padding()
+                // تشجيع إضافي
+                Text("Keep going")
+                    .font(.system(size: 14))
+                    .foregroundColor(Color("TextH2"))
+
+                // أزرار الإجراءات
+                HStack(spacing: 16) {
+                    Button(action: onTryAnother) {
+                        Text("Try another")
+                            .font(.system(size: 16, weight: .semibold))
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 12)
+                            .background(Color("Button"))
+                            .foregroundColor(.white)
+                            .cornerRadius(20)
+                    }
+
+                    Button(action: onHome) {
+                        Text("Home")
+                            .font(.system(size: 16, weight: .semibold))
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 12)
+                            .background(Color("Button"))
+                            .foregroundColor(.white)
+                            .cornerRadius(20)
+                    }
+                }
+            }
+            .padding(32)
+            .background(Color("lightpurple"))
+            .cornerRadius(24)
+            .padding(.horizontal, 24)
         }
-        .padding()
     }
 }
