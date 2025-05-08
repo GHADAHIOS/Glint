@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		142B7FC22DCCBE6A008D832D /* EffectsLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 142B7FC12DCCBE6A008D832D /* EffectsLibrary */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		69AFA8242DC7E8E300745EBB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				142B7FC22DCCBE6A008D832D /* EffectsLibrary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,7 @@
 			);
 			name = Glint;
 			packageProductDependencies = (
+				142B7FC12DCCBE6A008D832D /* EffectsLibrary */,
 			);
 			productName = Glint;
 			productReference = 69AFA8112DC7E8E000745EBB /* Glint.app */;
@@ -195,6 +201,9 @@
 			);
 			mainGroup = 69AFA8082DC7E8E000745EBB;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				142B7FC02DCCBC1C008D832D /* XCRemoteSwiftPackageReference "effects-library" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 69AFA8122DC7E8E000745EBB /* Products */;
 			projectDirPath = "";
@@ -558,6 +567,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		142B7FC02DCCBC1C008D832D /* XCRemoteSwiftPackageReference "effects-library" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/GetStream/effects-library.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		142B7FC12DCCBE6A008D832D /* EffectsLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 142B7FC02DCCBC1C008D832D /* XCRemoteSwiftPackageReference "effects-library" */;
+			productName = EffectsLibrary;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 69AFA8092DC7E8E000745EBB /* Project object */;
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import EffectsLibrary
 
 struct CompletionView: View {
     var onHome: () -> Void
@@ -13,6 +14,7 @@ struct CompletionView: View {
 
     var body: some View {
         VStack(spacing: 20) {
+            FireworksView()
             Text("Well Done! 🎉")
                 .font(.title)
 
