@@ -3,12 +3,19 @@ import SwiftUI
 
 struct GroundingView: View {
     @ObservedObject var viewModel: GroundingViewModel
+    @Environment(\.dismiss) private var dismiss
     var body: some View {
         if viewModel.isTimeUp {
-            TimeUpView(onRetry: viewModel.reset)
-        } else if viewModel.isCompleted {
-            CompletionView(onHome: {}, onTryAnother: viewModel.reset)
-        } else {
+                TimeUpView(
+                    onRetry: viewModel.reset,
+                    onHome: { dismiss() }
+                )
+            } else if viewModel.isCompleted {
+                CompletionView(
+                    onHome: { dismiss() },
+                    onTryAnother: viewModel.reset
+                )
+            } else {
             let step = viewModel.steps[viewModel.currentStepIndex]
             let currentAnswers = viewModel.answers[viewModel.currentStepIndex]
             let isStepFilled = !currentAnswers.contains(where: { $0.trimmingCharacters(in: .whitespaces).isEmpty })
