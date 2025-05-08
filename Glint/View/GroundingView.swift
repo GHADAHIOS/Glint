@@ -16,39 +16,27 @@ struct GroundingView: View {
             ScrollView{
                 VStack(alignment: .leading, spacing: 20) {
                     HStack {
-                        Button("Cancel") {
+                        Button("Back") {
+                            viewModel.goBack()
                         }
-                        .foregroundColor(.gray)
+                        .foregroundColor(Color("TextH2"))
 
                         Spacer()
 
                         HStack(spacing: 4) {
                             Image(systemName: "clock")
+                                .foregroundColor(Color("lightpurple"))
                             Text(viewModel.formattedTime)
                                 .font(.system(size: 16))
-                                .foregroundColor(Color("Button"))
+                                .foregroundColor(Color("lightpurple"))
                         }
                     }
                     .padding(.horizontal)
 
-                    // هنا البروقرس بار نوره حطي التعديل هنا
-                    HStack(spacing: 12) {
-                        ForEach(0..<5, id: \.self) { index in
-                            if index < viewModel.currentStepIndex {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .foregroundColor(Color("TextH2"))
-                                    .font(.system(size: 20))
-                            } else if index == viewModel.currentStepIndex {
-                                Circle()
-                                    .fill(Color("TextH2"))
-                                    .frame(width: 12, height: 12)
-                            } else {
-                                Circle()
-                                    .stroke(Color.gray.opacity(0.4), lineWidth: 1.5)
-                                    .frame(width: 12, height: 12)
-                            }
-                        }
-                    }
+                    ProgressBarView(totalSteps: viewModel.steps.count, currentStep: viewModel.currentStepIndex)
+                        .padding(.horizontal)
+
+
                     .padding(.horizontal)
 
                     (

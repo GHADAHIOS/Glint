@@ -25,7 +25,7 @@ struct GlintApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            GroundingView(viewModel: GroundingViewModel())
         }
         .modelContainer(sharedModelContainer)
     }
