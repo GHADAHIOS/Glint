@@ -48,9 +48,10 @@ struct MainPageView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, 32)
 
+            // إدخال الوقت
             ZStack(alignment: .topLeading) {
                 VStack(spacing: 4) {
-                    Spacer().frame(height: 2) // تقليل المسافة العلوية
+                    Spacer().frame(height: 2)
 
                     HStack(spacing: 0) {
                         Picker("Hours", selection: $inputHours) {
@@ -87,7 +88,7 @@ struct MainPageView: View {
                             .background(Color.button)
                             .cornerRadius(14)
                     }
-                    .padding(.bottom, 0) // إزالة المسافة الزائدة
+                    .padding(.bottom, 0)
                 }
                 .frame(width: 320, height: 140)
                 .background(Color.gray.opacity(0.1))
@@ -109,6 +110,7 @@ struct MainPageView: View {
                     .offset(x: -33, y: -17)
             }
 
+            // الأنشطة
             VStack(alignment: .leading, spacing: 16) {
                 Text("Activity")
                     .font(.title3)
@@ -122,54 +124,57 @@ struct MainPageView: View {
                 .padding(.horizontal, 32)
             }
 
+            // الأداء مع الانتقال
             VStack(alignment: .leading, spacing: 16) {
                 Text("Performance")
                     .font(.title3)
                     .foregroundColor(.black)
                     .padding(.horizontal, 32)
 
-                ZStack {
-                    RoundedRectangle(cornerRadius: 30)
-                        .fill(
-                            LinearGradient(
-                                gradient: Gradient(colors: [
-                                    Color(red: 0.25, green: 0.2, blue: 0.7),
-                                    Color(red: 0.1, green: 0.05, blue: 0.3)
-                                ]),
-                                startPoint: .top, endPoint: .bottom
-                            )
-                        )
-                        .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 4)
-                        .frame(width: 357, height: 149)
-
+                NavigationLink(destination: PerformanceView()) {
                     ZStack {
-                        Image("overly3")
-                            .resizable()
-                            .scaledToFit()
-                        Image("overly2")
-                            .resizable()
-                            .scaledToFit()
-                    }
-                    .frame(width: 357, height: 60)
-                    .opacity(0.9)
-                    .offset(y: 45)
-                    .zIndex(0)
+                        RoundedRectangle(cornerRadius: 30)
+                            .fill(
+                                LinearGradient(
+                                    gradient: Gradient(colors: [
+                                        Color(red: 0.25, green: 0.2, blue: 0.7),
+                                        Color(red: 0.1, green: 0.05, blue: 0.3)
+                                    ]),
+                                    startPoint: .top, endPoint: .bottom
+                                )
+                            )
+                            .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 4)
+                            .frame(width: 357, height: 149)
 
-                    VStack(alignment: .leading, spacing: 6) {
-                        Text("you Spent")
-                            .font(.subheadline)
-                            .foregroundColor(.white.opacity(0.85))
-                        Text(totalTimeText)
-                            .font(.body)
-                            .bold()
-                            .foregroundColor(.white)
+                        ZStack {
+                            Image("overly3")
+                                .resizable()
+                                .scaledToFit()
+                            Image("overly2")
+                                .resizable()
+                                .scaledToFit()
+                        }
+                        .frame(width: 357, height: 60)
+                        .opacity(0.9)
+                        .offset(y: 45)
+                        .zIndex(0)
+
+                        VStack(alignment: .leading, spacing: 6) {
+                            Text("you Spent")
+                                .font(.subheadline)
+                                .foregroundColor(.white.opacity(0.85))
+                            Text(totalTimeText)
+                                .font(.body)
+                                .bold()
+                                .foregroundColor(.white)
+                        }
+                        .padding(.leading, 32)
+                        .padding(.bottom, 42)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .zIndex(1)
                     }
-                    .padding(.leading, 32)
-                    .padding(.bottom, 42)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .zIndex(1)
+                    .frame(maxWidth: .infinity, alignment: .center)
                 }
-                .frame(maxWidth: .infinity, alignment: .center)
             }
 
             Spacer()
@@ -222,5 +227,7 @@ struct ActivityCard: View {
 
 // MARK: - Preview
 #Preview {
-    MainPageView()
+    NavigationStack {
+        MainPageView()
+    }
 }
