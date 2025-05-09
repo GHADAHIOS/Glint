@@ -1,5 +1,8 @@
 import SwiftUI
 import SwiftData
+import Foundation
+
+// MARK: - نموذج البيانات
 
 // MARK: - شكل الزوايا اليمنى فقط
 struct RoundedCorners: Shape {
@@ -20,17 +23,22 @@ struct RoundedCorners: Shape {
 struct MainPageView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var entries: [DaydreamEntry]
-    
-    @State private var inputHours = ""
-    @State private var inputMinutes = ""
+
+    @State private var inputHours = "0"
+    @State private var inputMinutes = "0"
 
     var totalTimeText: String {
-        guard let last = entries.last else { return "0h 0m today in daydreaming" }
-        return "\(last.hours)h \(last.minutes)m today in daydreaming"
+        let calendar = Calendar.current
+        let todayEntries = entries.filter { calendar.isDateInToday($0.date) }
+        let totalMinutes = todayEntries.reduce(0) { $0 + $1.hours * 60 + $1.minutes }
+        let hours = totalMinutes / 60
+        let minutes = totalMinutes % 60
+        return "\(hours)h \(minutes)m today in daydreaming"
     }
 
     var body: some View {
         VStack(spacing: 40) {
+
             // العنوان
             VStack(alignment: .leading, spacing: 4) {
                 Text("Hey !")
@@ -52,20 +60,23 @@ struct MainPageView: View {
                     Spacer().frame(height: 12)
 
                     HStack(spacing: 40) {
-                        TextField("0 hours", text: $inputHours)
-                            .keyboardType(.numberPad)
-                            .frame(width: 60)
-                            .multilineTextAlignment(.center)
-                            .font(.callout)
-                            .fontWeight(.semibold)
+                        Picker("Hours", selection: $inputHours) {
+                            ForEach(0..<25) { hour in
+                                Text("\(hour) h").tag("\(hour.description)")
+                            }
+                        }
+                        .pickerStyle(.wheel)
+                        .frame(width: 80, height: 100)
 
-                        TextField("0 min", text: $inputMinutes)
-                            .keyboardType(.numberPad)
-                            .frame(width: 60)
-                            .multilineTextAlignment(.center)
-                            .font(.callout)
-                            .fontWeight(.semibold)
+                        Picker("Minutes", selection: $inputMinutes) {
+                            ForEach(0..<60) { min in
+                                Text("\(min) m").tag("\(min.description)")
+                            }
+                        }
+                        .pickerStyle(.wheel)
+                        .frame(width: 80, height: 100)
                     }
+
                     .padding(.horizontal, 14)
                     .padding(.vertical, 4)
                     .background(Color.darkgray)
@@ -76,8 +87,8 @@ struct MainPageView: View {
                         let m = Int(inputMinutes) ?? 0
                         let entry = DaydreamEntry(hours: h, minutes: m)
                         modelContext.insert(entry)
-                        inputHours = ""
-                        inputMinutes = ""
+                        inputHours = "0"
+                        inputMinutes = "0"
                     }) {
                         Text("Log")
                             .font(.body)
@@ -89,8 +100,8 @@ struct MainPageView: View {
                     .padding(.top, 4)
                     .padding(.bottom, 6)
                 }
-                .frame(width: 320, height: 100)
-                .background(Color(red: 0.96, green: 0.96, blue: 0.96))
+                .frame(width: 320, height: 180)
+                .background(Color.gray.opacity(0.1))
                 .cornerRadius(20)
                 .overlay(
                     RoundedRectangle(cornerRadius: 20)
@@ -118,79 +129,22 @@ struct MainPageView: View {
 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 16) {
-                        // البطاقة الأولى
-                        ZStack(alignment: .topTrailing) {
-                            VStack(alignment: .leading, spacing: 12) {
-                                HStack(spacing: 8) {
-                                    Text("5-4-3-2-1 Technique")
-                                        .font(.headline)
-                                        .foregroundColor(.white)
-                                    Image("face")
-                                        .foregroundColor(.white.opacity(0.6))
-                                }
-
-                                Spacer()
-
-                                HStack(spacing: 6) {
-                                    Text("5 Steps | 3–5 min")
-                                        .font(.subheadline)
-                                        .foregroundColor(.white.opacity(0.9))
-                                }
-                                .padding(.bottom, 4)
-                            }
-                            .padding()
-                            .frame(width: 170, height: 183)
-                            .background(
-                                RoundedRectangle(cornerRadius: 30)
-                                    .fill(
-                                        LinearGradient(
-                                            gradient: Gradient(colors: [Color(red: 0.75, green: 0.6, blue: 1.0), Color.lightpurple]),
-                                            startPoint: .topLeading,
-                                            endPoint: .bottomTrailing
-                                        )
-                                    )
-                            )
-                        }
-
-                        // البطاقة الثانية
-                        ZStack(alignment: .topTrailing) {
-                            VStack(alignment: .leading, spacing: 12) {
-                                HStack(spacing: 8) {
-                                    Text("Find Colors around you")
-                                        .font(.headline)
-                                        .foregroundColor(.white)
-                                    Image("man")
-                                        .foregroundColor(.white.opacity(0.6))
-                                }
-
-                                Spacer()
-
-                                HStack(spacing: 6) {
-                                    Text("1 Step | 2–3 min")
-                                        .font(.subheadline)
-                                        .foregroundColor(.white.opacity(0.9))
-                                }
-                                .padding(.bottom, 4)
-                            }
-                            .padding()
-                            .frame(width: 170, height: 183)
-                            .background(
-                                RoundedRectangle(cornerRadius: 30)
-                                    .fill(
-                                        LinearGradient(
-                                            gradient: Gradient(colors: [Color(red: 0.75, green: 0.6, blue: 1.0), Color.lightpurple]),
-                                            startPoint: .topLeading,
-                                            endPoint: .bottomTrailing
-                                        )
-                                    )
-                            )
-                        }
+                        ActivityCard(
+                            title: "5-4-3-2-1 Technique",
+                            image: "face",
+                            description: "5 Steps | 3–5 min"
+                        )
+                        ActivityCard(
+                            title: "Find Colors around you",
+                            image: "man",
+                            description: "1 Step | 2–3 min"
+                        )
                     }
                     .padding(.horizontal, 32)
                 }
             }
 
-            // أداء اليوم
+            // الأداء
             VStack(alignment: .leading, spacing: 16) {
                 Text("Performance")
                     .font(.title3)
@@ -198,7 +152,6 @@ struct MainPageView: View {
                     .padding(.horizontal, 32)
 
                 ZStack {
-                    // الخلفية
                     RoundedRectangle(cornerRadius: 30)
                         .fill(
                             LinearGradient(
@@ -213,7 +166,6 @@ struct MainPageView: View {
                         .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 4)
                         .frame(width: 357, height: 149)
 
-                    // زخرفة الصور
                     ZStack {
                         Image("overly3")
                             .resizable()
@@ -228,7 +180,6 @@ struct MainPageView: View {
                     .offset(y: 45)
                     .zIndex(0)
 
-                    // النصوص
                     VStack(alignment: .leading, spacing: 6) {
                         Text("you Spent")
                             .font(.subheadline)
@@ -253,6 +204,49 @@ struct MainPageView: View {
     }
 }
 
+// MARK: - Activity Card View
+struct ActivityCard: View {
+    let title: String
+    let image: String
+    let description: String
+
+    var body: some View {
+        ZStack(alignment: .topTrailing) {
+            VStack(alignment: .leading, spacing: 12) {
+                HStack(spacing: 8) {
+                    Text(title)
+                        .font(.headline)
+                        .foregroundColor(.white)
+                    Image(image)
+                        .foregroundColor(.white.opacity(0.6))
+                }
+
+                Spacer()
+
+                HStack(spacing: 6) {
+                    Text(description)
+                        .font(.subheadline)
+                        .foregroundColor(.white.opacity(0.9))
+                }
+                .padding(.bottom, 4)
+            }
+            .padding()
+            .frame(width: 170, height: 183)
+            .background(
+                RoundedRectangle(cornerRadius: 30)
+                    .fill(
+                        LinearGradient(
+                            gradient: Gradient(colors: [Color.lightpurple, Color.button]),
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+            )
+        }
+    }
+}
+
+// MARK: - Preview
 #Preview {
     MainPageView()
 }

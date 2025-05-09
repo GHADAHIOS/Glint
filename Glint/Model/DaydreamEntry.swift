@@ -1,10 +1,11 @@
 import SwiftData
 import Foundation
+// MARK: - نموذج البيانات
 @Model
 class DaydreamEntry {
+    var date: Date
     var hours: Int
     var minutes: Int
-    var date: Date
 
     init(hours: Int, minutes: Int, date: Date = Date()) {
         self.hours = hours
