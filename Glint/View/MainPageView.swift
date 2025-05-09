@@ -2,14 +2,13 @@ import SwiftUI
 import SwiftData
 import Foundation
 
-// MARK: - نموذج البيانات
-
 // MARK: - شكل الزوايا اليمنى فقط
 struct RoundedCorners: Shape {
     var radius: CGFloat = 25
     var corners: UIRectCorner = [.topRight, .bottomRight]
 
     func path(in rect: CGRect) -> Path {
+        // تحديد الزوايا الدائرية المخصصة (اليمنى فقط)
         let path = UIBezierPath(
             roundedRect: rect,
             byRoundingCorners: corners,
@@ -21,25 +20,30 @@ struct RoundedCorners: Shape {
 
 // MARK: - MainPageView
 struct MainPageView: View {
+    // الوصول إلى بيئة قاعدة البيانات
     @Environment(\.modelContext) private var modelContext
+
+    // جلب جميع الإدخالات المحفوظة
     @Query private var entries: [DaydreamEntry]
 
+    // حالة تمثل الوقت المدخل من المستخدم
     @State private var inputHours = "0"
     @State private var inputMinutes = "0"
 
+    // حساب الوقت الإجمالي لليوم الحالي
+    // عرض آخر إدخال فقط من قبل المستخدم
     var totalTimeText: String {
-        let calendar = Calendar.current
-        let todayEntries = entries.filter { calendar.isDateInToday($0.date) }
-        let totalMinutes = todayEntries.reduce(0) { $0 + $1.hours * 60 + $1.minutes }
-        let hours = totalMinutes / 60
-        let minutes = totalMinutes % 60
-        return "\(hours)h \(minutes)m today in daydreaming"
+        if let latestEntry = entries.sorted(by: { $0.date > $1.date }).first {
+            return "\(latestEntry.hours)h \(latestEntry.minutes)m today in daydreaming"
+        } else {
+            return "0h 0m today in daydreaming"
+        }
     }
 
     var body: some View {
         VStack(spacing: 40) {
 
-            // العنوان
+            // العنوان الرئيسي
             VStack(alignment: .leading, spacing: 4) {
                 Text("Hey !")
                     .font(.largeTitle)
@@ -54,19 +58,22 @@ struct MainPageView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, 32)
 
-            // إدخال الوقت
+            // مستطيل إدخال الوقت
             ZStack(alignment: .topLeading) {
                 VStack(spacing: 6) {
                     Spacer().frame(height: 12)
 
-                    HStack(spacing: 40) {
+                    // عجلات اختيار الساعات والدقائق
+                    HStack(spacing: 6) {
                         Picker("Hours", selection: $inputHours) {
                             ForEach(0..<25) { hour in
                                 Text("\(hour) h").tag("\(hour.description)")
                             }
                         }
                         .pickerStyle(.wheel)
-                        .frame(width: 80, height: 100)
+                        .frame(width: 110, height: 60)
+                        .clipped()
+                        .font(.footnote)
 
                         Picker("Minutes", selection: $inputMinutes) {
                             ForEach(0..<60) { min in
@@ -74,14 +81,16 @@ struct MainPageView: View {
                             }
                         }
                         .pickerStyle(.wheel)
-                        .frame(width: 80, height: 100)
+                        .frame(width: 110, height: 60)
+                        .clipped()
+                        .font(.footnote)
                     }
-
                     .padding(.horizontal, 14)
                     .padding(.vertical, 4)
                     .background(Color.darkgray)
                     .cornerRadius(12)
 
+                    // زر الحفظ
                     Button(action: {
                         let h = Int(inputHours) ?? 0
                         let m = Int(inputMinutes) ?? 0
@@ -108,6 +117,7 @@ struct MainPageView: View {
                         .stroke(Color.gray.opacity(0.4), lineWidth: 1)
                 )
 
+                // العنوان الصغير داخل البطاقة
                 Text("How long were you daydreaming today?")
                     .font(.callout)
                     .foregroundColor(.black)
@@ -125,7 +135,7 @@ struct MainPageView: View {
                 Text("Activity")
                     .font(.title3)
                     .foregroundColor(.black)
-                    .padding(.horizontal, 32)
+                    .padding(.horizontal, 32) // نفس محاذاة الأداء
 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 16) {
@@ -140,11 +150,11 @@ struct MainPageView: View {
                             description: "1 Step | 2–3 min"
                         )
                     }
-                    .padding(.horizontal, 32)
+                    .padding(.horizontal, 32) // نفس محاذاة الأداء
                 }
             }
 
-            // الأداء
+            // الأداء اليومي
             VStack(alignment: .leading, spacing: 16) {
                 Text("Performance")
                     .font(.title3)
@@ -152,6 +162,7 @@ struct MainPageView: View {
                     .padding(.horizontal, 32)
 
                 ZStack {
+                    // خلفية الأداء
                     RoundedRectangle(cornerRadius: 30)
                         .fill(
                             LinearGradient(
@@ -166,6 +177,7 @@ struct MainPageView: View {
                         .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 4)
                         .frame(width: 357, height: 149)
 
+                    // الصور الزخرفية
                     ZStack {
                         Image("overly3")
                             .resizable()
@@ -180,6 +192,7 @@ struct MainPageView: View {
                     .offset(y: 45)
                     .zIndex(0)
 
+                    // نص الوقت المحسوب
                     VStack(alignment: .leading, spacing: 6) {
                         Text("you Spent")
                             .font(.subheadline)
@@ -190,7 +203,7 @@ struct MainPageView: View {
                             .bold()
                             .foregroundColor(.white)
                     }
-                    .padding(.leading, 24)
+                    .padding(.leading, 32) // عدلنا من 24 إلى 32
                     .padding(.bottom, 42)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .zIndex(1)
