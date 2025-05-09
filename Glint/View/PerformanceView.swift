@@ -6,12 +6,13 @@ struct PerformanceView: View {
 
     private let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 
+    // تجميع إجمالي الساعات لكل يوم من الأسبوع
     private var dailyTotals: [String: Int] {
         var totals: [String: Int] = [:]
         let calendar = Calendar.current
 
         for entry in entries {
-            let weekday = calendar.component(.weekday, from: entry.date) // Sunday = 1
+            let weekday = calendar.component(.weekday, from: entry.date)
             let daySymbol = calendar.shortWeekdaySymbols[weekday - 1]
             totals[daySymbol, default: 0] += entry.hours
         }
@@ -28,6 +29,7 @@ struct PerformanceView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal)
 
+                // الرسم البياني
                 HStack(alignment: .bottom, spacing: 50) {
                     HStack(alignment: .bottom, spacing: 15) {
                         ForEach(days, id: \.self) { day in
@@ -46,6 +48,7 @@ struct PerformanceView: View {
                         }
                     }
 
+                    // المحور Y
                     VStack(alignment: .trailing, spacing: 16) {
                         ForEach((0...6).reversed(), id: \.self) { i in
                             Text("\(i * 4)h")
@@ -59,14 +62,18 @@ struct PerformanceView: View {
                 .frame(height: 280)
                 .padding(.horizontal)
 
+                // البطاقات السفلية
                 HStack(spacing: 16) {
+                    // متوسط الأسبوع
                     StatCardView(
-                        title: "Weekly Change",
-                        value: "-26%",
-                        icon: "chart.line.downtrend.xyaxis",
-                        iconColor: .red,
-                        valueColor: .red
+                        title: "Weekly Average",
+                        value: weeklyAverageText,
+                        icon: "chart.bar.fill",
+                        iconColor: .blue,
+                        valueColor: .blue
                     )
+
+                    // بيانات اليوم
                     StatCardView(
                         title: "Today’s daydreaming",
                         value: todayEntryText,
@@ -80,13 +87,16 @@ struct PerformanceView: View {
         }
     }
 
+    // إجمالي ساعات اليوم
     private var todayHours: Int {
         let calendar = Calendar.current
-        return entries.filter { calendar.isDateInToday($0.date) }
+        return entries
+            .filter { calendar.isDateInToday($0.date) }
             .map { $0.hours }
             .reduce(0, +)
     }
 
+    // ساعات ودقائق اليوم
     private var todayEntryText: String {
         let calendar = Calendar.current
         let todayEntries = entries.filter { calendar.isDateInToday($0.date) }
@@ -96,6 +106,20 @@ struct PerformanceView: View {
         return "\(hours)h \(minutes)m"
     }
 
+    // متوسط الأسبوع
+    private var weeklyAverageText: String {
+        let calendar = Calendar.current
+        guard let sevenDaysAgo = calendar.date(byAdding: .day, value: -6, to: Date()) else { return "0h 0m" }
+
+        let recentEntries = entries.filter { $0.date >= sevenDaysAgo }
+        let totalMinutes = recentEntries.reduce(0) { $0 + $1.hours * 60 + $1.minutes }
+        let averageMinutes = totalMinutes / 7
+        let hours = averageMinutes / 60
+        let minutes = averageMinutes % 60
+        return "\(hours)h \(minutes)m"
+    }
+
+    // الإيموجي حسب عدد الساعات
     private func emoji(for hours: Int) -> String {
         switch hours {
         case 0: return "😐"
@@ -108,6 +132,7 @@ struct PerformanceView: View {
         }
     }
 
+    // اللون حسب عدد الساعات
     private func color(for hours: Int) -> Color {
         switch hours {
         case 0...2: return .yellow
@@ -118,6 +143,7 @@ struct PerformanceView: View {
     }
 }
 
+// بطاقة الأداء
 struct StatCardView: View {
     var title: String
     var value: String
@@ -152,8 +178,7 @@ struct StatCardView: View {
         .cornerRadius(16)
     }
 }
-struct PerformanceView_Previews: PreviewProvider {
-    static var previews: some View {
-        PerformanceView()
-    }
+
+#Preview {
+    PerformanceView()
 }
