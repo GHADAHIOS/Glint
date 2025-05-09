@@ -122,7 +122,7 @@ struct MainPageView: View {
                         ZStack(alignment: .topTrailing) {
                             VStack(alignment: .leading, spacing: 12) {
                                 HStack(spacing: 8) {
-                                    Text("Find Colors\naround you")
+                                    Text("5-4-3-2-1 Technique")
                                         .font(.headline)
                                         .foregroundColor(.white)
                                     Image("face")
@@ -156,7 +156,7 @@ struct MainPageView: View {
                         ZStack(alignment: .topTrailing) {
                             VStack(alignment: .leading, spacing: 12) {
                                 HStack(spacing: 8) {
-                                    Text("Relax your\nbody")
+                                    Text("Find Colors around you")
                                         .font(.headline)
                                         .foregroundColor(.white)
                                     Image("man")
