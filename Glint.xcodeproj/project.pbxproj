@@ -28,7 +28,28 @@
 			remoteGlobalIDString = 69AFA8102DC7E8E000745EBB;
 			remoteInfo = Glint;
 		};
+		95688A522DCFA6A700DF65D6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 69AFA8092DC7E8E000745EBB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 95688A3D2DCFA6A600DF65D6;
+			remoteInfo = GlintWidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		95688A592DCFA6A700DF65D6 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				95688A542DCFA6A700DF65D6 /* GlintWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		69AFA8112DC7E8E000745EBB /* Glint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Glint.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -39,6 +60,16 @@
 		EC6576CB2DD218E900AF6128 /* TimesUpPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesUpPopup.swift; sourceTree = "<group>"; };
 		EC6576CD2DD218F400AF6128 /* WrongAnswerPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongAnswerPopup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		95688A552DCFA6A700DF65D6 /* Exceptions for "GlintWidget" folder in "GlintWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 95688A3D2DCFA6A600DF65D6 /* GlintWidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		69AFA8132DC7E8E000745EBB /* Glint */ = {
@@ -54,6 +85,14 @@
 		69AFA8302DC7E8E300745EBB /* GlintUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = GlintUITests;
+			sourceTree = "<group>";
+		};
+		95688A442DCFA6A600DF65D6 /* GlintWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				95688A552DCFA6A700DF65D6 /* Exceptions for "GlintWidget" folder in "GlintWidgetExtension" target */,
+			);
+			path = GlintWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -80,15 +119,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		95688A3B2DCFA6A600DF65D6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				95688A432DCFA6A600DF65D6 /* SwiftUI.framework in Frameworks */,
+				95688A412DCFA6A600DF65D6 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		69AFA8082DC7E8E000745EBB = {
 			isa = PBXGroup;
 			children = (
+				95688A5A2DCFA7EA00DF65D6 /* GlintWidgetExtension.entitlements */,
 				69AFA8132DC7E8E000745EBB /* Glint */,
 				69AFA8262DC7E8E300745EBB /* GlintTests */,
 				69AFA8302DC7E8E300745EBB /* GlintUITests */,
+				95688A442DCFA6A600DF65D6 /* GlintWidget */,
+				95688A3F2DCFA6A600DF65D6 /* Frameworks */,
 				69AFA8122DC7E8E000745EBB /* Products */,
 				EC6576C72DD218B600AF6128 /* CameraFeedModel.swift */,
 				EC6576C92DD218D000AF6128 /* CameraView.swift */,
@@ -103,8 +154,18 @@
 				69AFA8112DC7E8E000745EBB /* Glint.app */,
 				69AFA8232DC7E8E300745EBB /* GlintTests.xctest */,
 				69AFA82D2DC7E8E300745EBB /* GlintUITests.xctest */,
+				95688A3E2DCFA6A600DF65D6 /* GlintWidgetExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		95688A3F2DCFA6A600DF65D6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				95688A402DCFA6A600DF65D6 /* WidgetKit.framework */,
+				95688A422DCFA6A600DF65D6 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -117,10 +178,12 @@
 				69AFA80D2DC7E8E000745EBB /* Sources */,
 				69AFA80E2DC7E8E000745EBB /* Frameworks */,
 				69AFA80F2DC7E8E000745EBB /* Resources */,
+				95688A592DCFA6A700DF65D6 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				95688A532DCFA6A700DF65D6 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				69AFA8132DC7E8E000745EBB /* Glint */,
@@ -178,6 +241,28 @@
 			productReference = 69AFA82D2DC7E8E300745EBB /* GlintUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		95688A3D2DCFA6A600DF65D6 /* GlintWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 95688A562DCFA6A700DF65D6 /* Build configuration list for PBXNativeTarget "GlintWidgetExtension" */;
+			buildPhases = (
+				95688A3A2DCFA6A600DF65D6 /* Sources */,
+				95688A3B2DCFA6A600DF65D6 /* Frameworks */,
+				95688A3C2DCFA6A600DF65D6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				95688A442DCFA6A600DF65D6 /* GlintWidget */,
+			);
+			name = GlintWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = GlintWidgetExtension;
+			productReference = 95688A3E2DCFA6A600DF65D6 /* GlintWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -199,6 +284,9 @@
 						CreatedOnToolsVersion = 16.2;
 						TestTargetID = 69AFA8102DC7E8E000745EBB;
 					};
+					95688A3D2DCFA6A600DF65D6 = {
+						CreatedOnToolsVersion = 16.2;
+					};
 				};
 			};
 			buildConfigurationList = 69AFA80C2DC7E8E000745EBB /* Build configuration list for PBXProject "Glint" */;
@@ -218,6 +306,7 @@
 				69AFA8102DC7E8E000745EBB /* Glint */,
 				69AFA8222DC7E8E300745EBB /* GlintTests */,
 				69AFA82C2DC7E8E300745EBB /* GlintUITests */,
+				95688A3D2DCFA6A600DF65D6 /* GlintWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -238,6 +327,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		69AFA82B2DC7E8E300745EBB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		95688A3C2DCFA6A600DF65D6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -272,6 +368,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		95688A3A2DCFA6A600DF65D6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -284,6 +387,11 @@
 			isa = PBXTargetDependency;
 			target = 69AFA8102DC7E8E000745EBB /* Glint */;
 			targetProxy = 69AFA82E2DC7E8E300745EBB /* PBXContainerItemProxy */;
+		};
+		95688A532DCFA6A700DF65D6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 95688A3D2DCFA6A600DF65D6 /* GlintWidgetExtension */;
+			targetProxy = 95688A522DCFA6A700DF65D6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -412,6 +520,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Glint/Glint.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Glint/Preview Content\"";
@@ -431,6 +541,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = co.Glint;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -442,6 +553,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Glint/Glint.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Glint/Preview Content\"";
@@ -461,6 +574,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = co.Glint;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -473,7 +587,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SG894QZK76;
+				DEVELOPMENT_TEAM = 53S2NHG2A9;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				MARKETING_VERSION = 1.0;
@@ -492,7 +606,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SG894QZK76;
+				DEVELOPMENT_TEAM = 53S2NHG2A9;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				MARKETING_VERSION = 1.0;
@@ -510,7 +624,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SG894QZK76;
+				DEVELOPMENT_TEAM = 53S2NHG2A9;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = co.GlintUITests;
@@ -527,7 +641,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SG894QZK76;
+				DEVELOPMENT_TEAM = 53S2NHG2A9;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = co.GlintUITests;
@@ -536,6 +650,62 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Glint;
+			};
+			name = Release;
+		};
+		95688A572DCFA6A700DF65D6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = GlintWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 53S2NHG2A9;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GlintWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = GlintWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = co.Glint.GlintWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		95688A582DCFA6A700DF65D6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = GlintWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 53S2NHG2A9;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GlintWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = GlintWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = co.Glint.GlintWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -574,6 +744,15 @@
 			buildConfigurations = (
 				69AFA83E2DC7E8E300745EBB /* Debug */,
 				69AFA83F2DC7E8E300745EBB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		95688A562DCFA6A700DF65D6 /* Build configuration list for PBXNativeTarget "GlintWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				95688A572DCFA6A700DF65D6 /* Debug */,
+				95688A582DCFA6A700DF65D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
