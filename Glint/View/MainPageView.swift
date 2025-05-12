@@ -1,6 +1,7 @@
 import SwiftUI
 import SwiftData
 import Foundation
+import WidgetKit
 
 // MARK: - شكل الزوايا اليمنى فقط
 struct RoundedCorners: Shape {
@@ -78,6 +79,12 @@ struct MainPageView: View {
                         let m = Int(inputMinutes) ?? 0
                         let entry = DaydreamEntry(hours: h, minutes: m)
                         modelContext.insert(entry)
+                        
+                        let defaults = UserDefaults(suiteName: "group.com.rinad.Glint")
+                        defaults?.set(h, forKey: "lastHours")
+                        defaults?.set(m, forKey: "lastMinutes")
+
+                        WidgetCenter.shared.reloadAllTimelines()
                         inputHours = "0"
                         inputMinutes = "0"
                     }) {
@@ -183,7 +190,7 @@ struct MainPageView: View {
     }
 }
 
-// MARK: - Activity Card View
+
 struct ActivityCard: View {
     let title: String
     let image: String
@@ -225,7 +232,7 @@ struct ActivityCard: View {
     }
 }
 
-// MARK: - Preview
+
 #Preview {
     NavigationStack {
         MainPageView()
