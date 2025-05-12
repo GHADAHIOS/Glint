@@ -6,6 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		EC6576C82DD218B600AF6128 /* CameraFeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6576C72DD218B600AF6128 /* CameraFeedModel.swift */; };
+		EC6576CA2DD218D000AF6128 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6576C92DD218D000AF6128 /* CameraView.swift */; };
+		EC6576CC2DD218E900AF6128 /* TimesUpPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6576CB2DD218E900AF6128 /* TimesUpPopup.swift */; };
+		EC6576CE2DD218F400AF6128 /* WrongAnswerPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6576CD2DD218F400AF6128 /* WrongAnswerPopup.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		69AFA8242DC7E8E300745EBB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +34,10 @@
 		69AFA8112DC7E8E000745EBB /* Glint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Glint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69AFA8232DC7E8E300745EBB /* GlintTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GlintTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		69AFA82D2DC7E8E300745EBB /* GlintUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GlintUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC6576C72DD218B600AF6128 /* CameraFeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraFeedModel.swift; sourceTree = "<group>"; };
+		EC6576C92DD218D000AF6128 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		EC6576CB2DD218E900AF6128 /* TimesUpPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesUpPopup.swift; sourceTree = "<group>"; };
+		EC6576CD2DD218F400AF6128 /* WrongAnswerPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongAnswerPopup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -79,6 +90,10 @@
 				69AFA8262DC7E8E300745EBB /* GlintTests */,
 				69AFA8302DC7E8E300745EBB /* GlintUITests */,
 				69AFA8122DC7E8E000745EBB /* Products */,
+				EC6576C72DD218B600AF6128 /* CameraFeedModel.swift */,
+				EC6576C92DD218D000AF6128 /* CameraView.swift */,
+				EC6576CB2DD218E900AF6128 /* TimesUpPopup.swift */,
+				EC6576CD2DD218F400AF6128 /* WrongAnswerPopup.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -236,6 +251,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC6576CC2DD218E900AF6128 /* TimesUpPopup.swift in Sources */,
+				EC6576C82DD218B600AF6128 /* CameraFeedModel.swift in Sources */,
+				EC6576CE2DD218F400AF6128 /* WrongAnswerPopup.swift in Sources */,
+				EC6576CA2DD218D000AF6128 /* CameraView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,9 +415,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Glint/Preview Content\"";
-				DEVELOPMENT_TEAM = SG894QZK76;
+				DEVELOPMENT_TEAM = NH3RJ826P8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME)We Need Access To The Camera To Detect Colors";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -425,9 +445,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Glint/Preview Content\"";
-				DEVELOPMENT_TEAM = SG894QZK76;
+				DEVELOPMENT_TEAM = NH3RJ826P8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME)We Need Access To The Camera To Detect Colors";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

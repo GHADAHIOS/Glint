@@ -119,7 +119,12 @@ struct MainPageView: View {
 
                 HStack(spacing: 16) {
                     ActivityCard(title: "5-4-3-2-1 Technique", image: "face", description: "5 Steps | 3–5 min")
-                    ActivityCard(title: "Find Colors around you", image: "man", description: "1 Step | 2–3 min")
+
+                    
+                    NavigationLink(destination: CameraView()) {
+                        ActivityCard(title: "Find Colors around you", image: "man", description: "1 Step | 2–3 min")
+                    }
+                    .buttonStyle(PlainButtonStyle())
                 }
                 .padding(.horizontal, 32)
             }
