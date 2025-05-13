@@ -22,7 +22,7 @@ struct PerformanceView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 24) {
+            VStack(alignment: .leading, spacing: 28) {
                 Text("Performance")
                     .font(.system(size: 36, weight: .bold))
                     .foregroundColor(Color.purple)
@@ -30,8 +30,8 @@ struct PerformanceView: View {
                     .padding(.horizontal)
 
                 // الرسم البياني
-                HStack(alignment: .bottom, spacing: 50) {
-                    HStack(alignment: .bottom, spacing: 15) {
+                HStack(alignment: .bottom, spacing: 40) {
+                    HStack(alignment: .bottom, spacing: 14) {
                         ForEach(days, id: \.self) { day in
                             let total = dailyTotals[day] ?? 0
                             VStack(spacing: 6) {
@@ -64,30 +64,29 @@ struct PerformanceView: View {
 
                 // البطاقات السفلية
                 HStack(spacing: 16) {
-                    // متوسط الأسبوع
+                    // متوسط الأسبوع مع صورة بناء على النسبة
                     StatCardView(
                         title: "Weekly Average",
                         value: weeklyAverageText,
-                        icon: "chart.bar.fill",
-                        iconColor: .blue,
-                        valueColor: .blue
+                        icon: weeklyAverageAbove50 ? "chart.line.downtrend.xyaxis" : "chart.line.uptrend.xyaxis",
+                        iconColor: weeklyAverageAbove50 ? .red : .green,
+                        valueColor: weeklyAverageAbove50 ? .red : .green
                     )
 
-                    // بيانات اليوم
+                    // بيانات اليوم: مجموع الدقائق وإيموجي
                     StatCardView(
                         title: "Today’s daydreaming",
                         value: todayEntryText,
                         emoji: emoji(for: todayHours)
                     )
                 }
-                .padding(.top, 32)
+                .padding(.top, 48)
                 .padding(.horizontal)
             }
             .padding(.vertical)
         }
     }
 
-    // إجمالي ساعات اليوم
     private var todayHours: Int {
         let calendar = Calendar.current
         return entries
@@ -96,7 +95,6 @@ struct PerformanceView: View {
             .reduce(0, +)
     }
 
-    // ساعات ودقائق اليوم
     private var todayEntryText: String {
         let calendar = Calendar.current
         let todayEntries = entries.filter { calendar.isDateInToday($0.date) }
@@ -106,7 +104,6 @@ struct PerformanceView: View {
         return "\(hours)h \(minutes)m"
     }
 
-    // متوسط الأسبوع
     private var weeklyAverageText: String {
         let calendar = Calendar.current
         guard let sevenDaysAgo = calendar.date(byAdding: .day, value: -6, to: Date()) else { return "0h 0m" }
@@ -119,7 +116,14 @@ struct PerformanceView: View {
         return "\(hours)h \(minutes)m"
     }
 
-    // الإيموجي حسب عدد الساعات
+    private var weeklyAverageAbove50: Bool {
+        let calendar = Calendar.current
+        guard let sevenDaysAgo = calendar.date(byAdding: .day, value: -6, to: Date()) else { return false }
+        let recentEntries = entries.filter { $0.date >= sevenDaysAgo }
+        let totalMinutes = recentEntries.reduce(0) { $0 + $1.hours * 60 + $1.minutes }
+        return totalMinutes / 7 >= 50
+    }
+
     private func emoji(for hours: Int) -> String {
         switch hours {
         case 0...1: return "😌"
@@ -133,7 +137,6 @@ struct PerformanceView: View {
         }
     }
 
-    // اللون حسب عدد الساعات
     private func color(for hours: Int) -> Color {
         switch hours {
         case 0...1: return .green4
@@ -148,7 +151,6 @@ struct PerformanceView: View {
     }
 }
 
-// بطاقة الأداء
 struct StatCardView: View {
     var title: String
     var value: String
