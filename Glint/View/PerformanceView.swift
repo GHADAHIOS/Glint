@@ -122,22 +122,27 @@ struct PerformanceView: View {
     // الإيموجي حسب عدد الساعات
     private func emoji(for hours: Int) -> String {
         switch hours {
-        case 0: return "😐"
-        case 1...3: return "☹️"
-        case 4...6: return "😯"
-        case 7...9: return "😠"
-        case 10...12: return "😡"
-        case 13...15: return "😤"
-        default: return "😊"
+        case 0...1: return "😌"
+        case 2...4: return "😐"
+        case 5...8: return "🙁"
+        case 9...12: return "😯"
+        case 13...16: return "😠"
+        case 17...20: return "😡"
+        case 21...24: return "😤"
+        default: return "😤"
         }
     }
 
     // اللون حسب عدد الساعات
     private func color(for hours: Int) -> Color {
         switch hours {
-        case 0...2: return .yellow
-        case 3...6: return .orange
-        case 7...10: return .red
+        case 0...1: return .green4
+        case 2...4: return .yellow4
+        case 5...8: return .darkyallow
+        case 9...12: return .lightorange
+        case 13...16: return .darkOrange
+        case 17...20: return .lightred
+        case 21...24: return .darkred
         default: return .green
         }
     }
