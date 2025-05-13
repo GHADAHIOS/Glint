@@ -1,3 +1,4 @@
+
 import SwiftUI
 import SwiftData
 
@@ -25,7 +26,7 @@ struct PerformanceView: View {
             VStack(alignment: .leading, spacing: 28) {
                 Text("Performance")
                     .font(.system(size: 36, weight: .bold))
-                    .foregroundColor(Color.purple)
+                    .foregroundColor(Color.textH1)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal)
 
@@ -43,7 +44,7 @@ struct PerformanceView: View {
                                     .cornerRadius(4)
                                 Text(day)
                                     .font(.caption)
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.textH1)
                             }
                         }
                     }
@@ -53,7 +54,7 @@ struct PerformanceView: View {
                         ForEach((0...6).reversed(), id: \.self) { i in
                             Text("\(i * 4)h")
                                 .font(.system(size: 12))
-                                .foregroundColor(.gray)
+                                .foregroundColor(.textH1)
                                 .frame(height: 28)
                         }
                     }
@@ -61,6 +62,8 @@ struct PerformanceView: View {
                 }
                 .frame(height: 280)
                 .padding(.horizontal)
+
+                Spacer(minLength: 40)
 
                 // البطاقات السفلية
                 HStack(spacing: 16) {
@@ -80,7 +83,7 @@ struct PerformanceView: View {
                         emoji: emoji(for: todayHours)
                     )
                 }
-                .padding(.top, 48)
+                
                 .padding(.horizontal)
             }
             .padding(.vertical)
