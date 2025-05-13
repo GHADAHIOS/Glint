@@ -1,57 +1,54 @@
 import SwiftUI
+import SwiftData
 
 struct PerformanceView: View {
-    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-    let hours: [CGFloat] = [2, 4, 8, 14, 18, 22, 1]
-    let colors: [Color] = [
-        .yellow,
-        .yellow.opacity(0.8),
-        .orange,
-        .orange.opacity(0.9),
-        .red,
-        .red.opacity(0.9),
-        .green
-    ]
-    let emojis = ["😐", "☹️", "😯", "😠", "😡", "😤", "😊"]
+    @Query private var entries: [DaydreamEntry]
+
+    private let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+
+    // تجميع إجمالي الساعات لكل يوم من الأسبوع
+    private var dailyTotals: [String: Int] {
+        var totals: [String: Int] = [:]
+        let calendar = Calendar.current
+
+        for entry in entries {
+            let weekday = calendar.component(.weekday, from: entry.date)
+            let daySymbol = calendar.shortWeekdaySymbols[weekday - 1]
+            totals[daySymbol, default: 0] += entry.hours
+        }
+
+        return totals
+    }
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
-
-                // زر العودة
-                Text("Back")
-                    .foregroundColor(Color(#colorLiteral(red: 0.274, green: 0.188, blue: 0.682, alpha: 1)))
-                    .padding(.leading)
-
-                // العنوان
                 Text("Performance")
                     .font(.system(size: 36, weight: .bold))
-                    .foregroundColor(Color(#colorLiteral(red: 0.274, green: 0.188, blue: 0.682, alpha: 1)))
+                    .foregroundColor(Color.purple)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal)
 
                 // الرسم البياني
                 HStack(alignment: .bottom, spacing: 50) {
-                    // الأعمدة
                     HStack(alignment: .bottom, spacing: 15) {
-                        ForEach(0..<days.count, id: \.self) { index in
+                        ForEach(days, id: \.self) { day in
+                            let total = dailyTotals[day] ?? 0
                             VStack(spacing: 6) {
-                                Text(emojis[index])
+                                Text(emoji(for: total))
                                     .font(.system(size: 20))
-
                                 Rectangle()
-                                    .fill(colors[index])
-                                    .frame(width: 20, height: hours[index] * 10)
+                                    .fill(color(for: total))
+                                    .frame(width: 20, height: CGFloat(total) * 10)
                                     .cornerRadius(4)
-
-                                Text(days[index])
+                                Text(day)
                                     .font(.caption)
                                     .foregroundColor(.black)
                             }
                         }
                     }
 
-                    // المحور Y على اليمين
+                    // المحور Y
                     VStack(alignment: .trailing, spacing: 16) {
                         ForEach((0...6).reversed(), id: \.self) { i in
                             Text("\(i * 4)h")
@@ -67,18 +64,20 @@ struct PerformanceView: View {
 
                 // البطاقات السفلية
                 HStack(spacing: 16) {
+                    // متوسط الأسبوع
                     StatCardView(
-                        title: "Weekly Change",
-                        value: "-26%",
-                        icon: "chart.line.downtrend.xyaxis",
-                        iconColor: .red,
-                        valueColor: .red
+                        title: "Weekly Average",
+                        value: weeklyAverageText,
+                        icon: "chart.bar.fill",
+                        iconColor: .blue,
+                        valueColor: .blue
                     )
 
+                    // بيانات اليوم
                     StatCardView(
                         title: "Today’s daydreaming",
-                        value: "0h 52m",
-                        emoji: "😐"
+                        value: todayEntryText,
+                        emoji: emoji(for: todayHours)
                     )
                 }
                 .padding(.top, 32)
@@ -87,8 +86,64 @@ struct PerformanceView: View {
             .padding(.vertical)
         }
     }
+
+    // إجمالي ساعات اليوم
+    private var todayHours: Int {
+        let calendar = Calendar.current
+        return entries
+            .filter { calendar.isDateInToday($0.date) }
+            .map { $0.hours }
+            .reduce(0, +)
+    }
+
+    // ساعات ودقائق اليوم
+    private var todayEntryText: String {
+        let calendar = Calendar.current
+        let todayEntries = entries.filter { calendar.isDateInToday($0.date) }
+        let totalMinutes = todayEntries.reduce(0) { $0 + $1.hours * 60 + $1.minutes }
+        let hours = totalMinutes / 60
+        let minutes = totalMinutes % 60
+        return "\(hours)h \(minutes)m"
+    }
+
+    // متوسط الأسبوع
+    private var weeklyAverageText: String {
+        let calendar = Calendar.current
+        guard let sevenDaysAgo = calendar.date(byAdding: .day, value: -6, to: Date()) else { return "0h 0m" }
+
+        let recentEntries = entries.filter { $0.date >= sevenDaysAgo }
+        let totalMinutes = recentEntries.reduce(0) { $0 + $1.hours * 60 + $1.minutes }
+        let averageMinutes = totalMinutes / 7
+        let hours = averageMinutes / 60
+        let minutes = averageMinutes % 60
+        return "\(hours)h \(minutes)m"
+    }
+
+    // الإيموجي حسب عدد الساعات
+    private func emoji(for hours: Int) -> String {
+        switch hours {
+        case 0: return "😐"
+        case 1...3: return "☹️"
+        case 4...6: return "😯"
+        case 7...9: return "😠"
+        case 10...12: return "😡"
+        case 13...15: return "😤"
+        default: return "😊"
+        }
+    }
+
+    // اللون حسب عدد الساعات
+    private func color(for hours: Int) -> Color {
+        switch hours {
+        case 0...2: return .yellow
+        case 3...6: return .orange
+        case 7...10: return .red
+        default: return .green
+        }
+    }
 }
 
+// بطاقة الأداء
 struct StatCardView: View {
     var title: String
     var value: String
@@ -124,8 +179,6 @@ struct StatCardView: View {
     }
 }
 
-struct PerformanceView_Previews: PreviewProvider {
-    static var previews: some View {
-        PerformanceView()
-    }
+#Preview {
+    PerformanceView()
 }

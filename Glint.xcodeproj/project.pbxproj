@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		142B7FC22DCCBE6A008D832D /* EffectsLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 142B7FC12DCCBE6A008D832D /* EffectsLibrary */; };
+		EC6576C82DD218B600AF6128 /* CameraFeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6576C72DD218B600AF6128 /* CameraFeedModel.swift */; };
+		EC6576CA2DD218D000AF6128 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6576C92DD218D000AF6128 /* CameraView.swift */; };
+		EC6576CC2DD218E900AF6128 /* TimesUpPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6576CB2DD218E900AF6128 /* TimesUpPopup.swift */; };
+		EC6576CE2DD218F400AF6128 /* WrongAnswerPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6576CD2DD218F400AF6128 /* WrongAnswerPopup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,10 +30,27 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		95688A592DCFA6A700DF65D6 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		69AFA8112DC7E8E000745EBB /* Glint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Glint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69AFA8232DC7E8E300745EBB /* GlintTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GlintTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		69AFA82D2DC7E8E300745EBB /* GlintUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GlintUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC6576C72DD218B600AF6128 /* CameraFeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraFeedModel.swift; sourceTree = "<group>"; };
+		EC6576C92DD218D000AF6128 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		EC6576CB2DD218E900AF6128 /* TimesUpPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesUpPopup.swift; sourceTree = "<group>"; };
+		EC6576CD2DD218F400AF6128 /* WrongAnswerPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongAnswerPopup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -49,6 +69,11 @@
 			path = GlintUITests;
 			sourceTree = "<group>";
 		};
+		95688A442DCFA6A600DF65D6 /* GlintWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = GlintWidget;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +81,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				142B7FC22DCCBE6A008D832D /* EffectsLibrary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,7 +107,13 @@
 				69AFA8132DC7E8E000745EBB /* Glint */,
 				69AFA8262DC7E8E300745EBB /* GlintTests */,
 				69AFA8302DC7E8E300745EBB /* GlintUITests */,
+				95688A442DCFA6A600DF65D6 /* GlintWidget */,
+				95688A3F2DCFA6A600DF65D6 /* Frameworks */,
 				69AFA8122DC7E8E000745EBB /* Products */,
+				EC6576C72DD218B600AF6128 /* CameraFeedModel.swift */,
+				EC6576C92DD218D000AF6128 /* CameraView.swift */,
+				EC6576CB2DD218E900AF6128 /* TimesUpPopup.swift */,
+				EC6576CD2DD218F400AF6128 /* WrongAnswerPopup.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,6 +127,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		95688A3F2DCFA6A600DF65D6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -107,6 +144,7 @@
 				69AFA80D2DC7E8E000745EBB /* Sources */,
 				69AFA80E2DC7E8E000745EBB /* Frameworks */,
 				69AFA80F2DC7E8E000745EBB /* Resources */,
+				95688A592DCFA6A700DF65D6 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -117,7 +155,6 @@
 			);
 			name = Glint;
 			packageProductDependencies = (
-				142B7FC12DCCBE6A008D832D /* EffectsLibrary */,
 			);
 			productName = Glint;
 			productReference = 69AFA8112DC7E8E000745EBB /* Glint.app */;
@@ -201,9 +238,6 @@
 			);
 			mainGroup = 69AFA8082DC7E8E000745EBB;
 			minimizedProjectReferenceProxies = 1;
-			packageReferences = (
-				142B7FC02DCCBC1C008D832D /* XCRemoteSwiftPackageReference "effects-library" */,
-			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 69AFA8122DC7E8E000745EBB /* Products */;
 			projectDirPath = "";
@@ -245,6 +279,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC6576CC2DD218E900AF6128 /* TimesUpPopup.swift in Sources */,
+				EC6576C82DD218B600AF6128 /* CameraFeedModel.swift in Sources */,
+				EC6576CE2DD218F400AF6128 /* WrongAnswerPopup.swift in Sources */,
+				EC6576CA2DD218D000AF6128 /* CameraView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,12 +440,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Glint/Glint.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Glint/Preview Content\"";
-				DEVELOPMENT_TEAM = SG894QZK76;
+				DEVELOPMENT_TEAM = NH3RJ826P8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "GlintWe Need Access To The Camera To Detect Colors";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -420,6 +461,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = co.Glint;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -431,12 +473,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Glint/Glint.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Glint/Preview Content\"";
-				DEVELOPMENT_TEAM = SG894QZK76;
+				DEVELOPMENT_TEAM = NH3RJ826P8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "GlintWe Need Access To The Camera To Detect Colors";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -449,6 +494,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = co.Glint;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -461,7 +507,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SG894QZK76;
+				DEVELOPMENT_TEAM = NH3RJ826P8;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				MARKETING_VERSION = 1.0;
@@ -480,7 +526,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SG894QZK76;
+				DEVELOPMENT_TEAM = NH3RJ826P8;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				MARKETING_VERSION = 1.0;
@@ -498,7 +544,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SG894QZK76;
+				DEVELOPMENT_TEAM = NH3RJ826P8;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = co.GlintUITests;
@@ -515,7 +561,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SG894QZK76;
+				DEVELOPMENT_TEAM = NH3RJ826P8;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = co.GlintUITests;
@@ -567,25 +613,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		142B7FC02DCCBC1C008D832D /* XCRemoteSwiftPackageReference "effects-library" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/GetStream/effects-library.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		142B7FC12DCCBE6A008D832D /* EffectsLibrary */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 142B7FC02DCCBC1C008D832D /* XCRemoteSwiftPackageReference "effects-library" */;
-			productName = EffectsLibrary;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 69AFA8092DC7E8E000745EBB /* Project object */;
 }
