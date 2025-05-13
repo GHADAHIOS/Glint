@@ -29,7 +29,7 @@ struct MainPageView: View {
     var totalTodayText: String {
         let calendar = Calendar.current
         let todayEntries = entries.filter { calendar.isDateInToday($0.date) }
-        let totalMinutes = todayEntries.reduce(0) { $0 + $1.hours * 60 + $1.minutes }
+        let totalMinutes = todayEntries.reduce(0) { $0 + ($1.hours * 60) + $1.minutes }
         let hours = totalMinutes / 60
         let minutes = totalMinutes % 60
         return "\(hours)h \(minutes)m today in daydreaming"
@@ -38,6 +38,7 @@ struct MainPageView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 40) {
+                // العنوان
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Hey !")
                         .font(.largeTitle)
@@ -248,6 +249,8 @@ struct ActivityCard: View {
         }
     }
 }
+
+// Preview
 #Preview {
     NavigationStack {
         MainPageView()
