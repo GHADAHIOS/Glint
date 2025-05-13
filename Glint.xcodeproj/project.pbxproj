@@ -445,7 +445,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Glint/Preview Content\"";
-				DEVELOPMENT_TEAM = NH3RJ826P8;
+				DEVELOPMENT_TEAM = SG894QZK76;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "GlintWe Need Access To The Camera To Detect Colors";
@@ -478,7 +478,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Glint/Preview Content\"";
-				DEVELOPMENT_TEAM = NH3RJ826P8;
+				DEVELOPMENT_TEAM = SG894QZK76;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "GlintWe Need Access To The Camera To Detect Colors";

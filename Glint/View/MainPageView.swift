@@ -26,12 +26,13 @@ struct MainPageView: View {
     @State private var inputHours = "0"
     @State private var inputMinutes = "0"
 
-    var totalTimeText: String {
-        if let latestEntry = entries.sorted(by: { $0.date > $1.date }).first {
-            return "\(latestEntry.hours)h \(latestEntry.minutes)m today in daydreaming"
-        } else {
-            return "0h 0m today in daydreaming"
-        }
+    var totalTodayText: String {
+        let calendar = Calendar.current
+        let todayEntries = entries.filter { calendar.isDateInToday($0.date) }
+        let totalMinutes = todayEntries.reduce(0) { $0 + $1.hours * 60 + $1.minutes }
+        let hours = totalMinutes / 60
+        let minutes = totalMinutes % 60
+        return "\(hours)h \(minutes)m today in daydreaming"
     }
 
     var body: some View {
@@ -49,12 +50,12 @@ struct MainPageView: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 32)
-                
+
                 // إدخال الوقت
                 ZStack(alignment: .topLeading) {
                     VStack(spacing: 4) {
                         Spacer().frame(height: 2)
-                        
+
                         HStack(spacing: 0) {
                             Picker("Hours", selection: $inputHours) {
                                 ForEach(0..<25) { hour in
@@ -64,7 +65,7 @@ struct MainPageView: View {
                             .pickerStyle(.wheel)
                             .frame(width: 120, height: 90)
                             .clipped()
-                            
+
                             Picker("Minutes", selection: $inputMinutes) {
                                 ForEach(0..<60) { min in
                                     Text("\(min) m").bold().tag("\(min.description)")
@@ -74,20 +75,30 @@ struct MainPageView: View {
                             .frame(width: 120, height: 90)
                             .clipped()
                         }
-                        
+
                         Button(action: {
                             let h = Int(inputHours) ?? 0
                             let m = Int(inputMinutes) ?? 0
-                            let entry = DaydreamEntry(hours: h, minutes: m)
-                            modelContext.insert(entry)
-                            
-                            let defaults = UserDefaults(suiteName: "group.com.rinad.Glint")
-                            defaults?.set(h, forKey: "lastHours")
-                            defaults?.set(m, forKey: "lastMinutes")
-                            
-                            WidgetCenter.shared.reloadAllTimelines()
-                            inputHours = "0"
-                            inputMinutes = "0"
+                            let newEntryMinutes = h * 60 + m
+
+                            let calendar = Calendar.current
+                            let todayEntries = entries.filter { calendar.isDateInToday($0.date) }
+                            let currentTotalMinutes = todayEntries.reduce(0) { $0 + $1.hours * 60 + $1.minutes }
+
+                            if currentTotalMinutes + newEntryMinutes <= 1440 {
+                                let entry = DaydreamEntry(hours: h, minutes: m)
+                                modelContext.insert(entry)
+
+                                let defaults = UserDefaults(suiteName: "group.com.rinad.Glint")
+                                defaults?.set(h, forKey: "lastHours")
+                                defaults?.set(m, forKey: "lastMinutes")
+
+                                WidgetCenter.shared.reloadAllTimelines()
+                                inputHours = "0"
+                                inputMinutes = "0"
+                            } else {
+                                print("Exceeded daily limit of 24 hours.")
+                            }
                         }) {
                             Text("Log")
                                 .font(.body)
@@ -105,7 +116,7 @@ struct MainPageView: View {
                         RoundedRectangle(cornerRadius: 20)
                             .stroke(Color.gray.opacity(0.4), lineWidth: 1)
                     )
-                    
+
                     Text("How long were you daydreaming today?")
                         .font(.callout)
                         .foregroundColor(.black)
@@ -117,18 +128,17 @@ struct MainPageView: View {
                         )
                         .offset(x: -33, y: -17)
                 }
-                
+
                 // الأنشطة
                 VStack(alignment: .leading, spacing: 16) {
                     Text("Activity")
                         .font(.title3)
                         .foregroundColor(.black)
                         .padding(.horizontal, 32)
-                    
+
                     HStack(spacing: 16) {
                         ActivityCard(title: "5-4-3-2-1 Technique", image: "face", description: "5 Steps | 3–5 min")
-                        
-                        
+
                         NavigationLink(destination: CameraView()) {
                             ActivityCard(title: "Find Colors around you", image: "man", description: "1 Step | 2–3 min")
                         }
@@ -136,14 +146,14 @@ struct MainPageView: View {
                     }
                     .padding(.horizontal, 32)
                 }
-                
-                // الأداء مع الانتقال
+
+                // الأداء مع الإجمالي
                 VStack(alignment: .leading, spacing: 16) {
                     Text("Performance")
                         .font(.title3)
                         .foregroundColor(.black)
                         .padding(.horizontal, 32)
-                    
+
                     NavigationLink(destination: PerformanceView()) {
                         ZStack {
                             RoundedRectangle(cornerRadius: 30)
@@ -158,7 +168,7 @@ struct MainPageView: View {
                                 )
                                 .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 4)
                                 .frame(width: 357, height: 149)
-                            
+
                             ZStack {
                                 Image("overly3")
                                     .resizable()
@@ -171,25 +181,25 @@ struct MainPageView: View {
                             .opacity(0.9)
                             .offset(y: 45)
                             .zIndex(0)
-                            
+
                             VStack(alignment: .leading, spacing: 6) {
                                 Text("you Spent")
                                     .font(.subheadline)
                                     .foregroundColor(.white.opacity(0.85))
-                                Text(totalTimeText)
+                                Text(totalTodayText)
                                     .font(.body)
                                     .bold()
                                     .foregroundColor(.white)
                             }
                             .padding(.leading, 32)
-                            .padding(.bottom, 42)
+                            .padding(.bottom, 32)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .zIndex(1)
                         }
                         .frame(maxWidth: .infinity, alignment: .center)
                     }
                 }
-                
+
                 Spacer()
             }
             .padding(.top, 40)
@@ -197,7 +207,7 @@ struct MainPageView: View {
     }
 }
 
-
+// MARK: - ActivityCard Component
 struct ActivityCard: View {
     let title: String
     let image: String
@@ -238,8 +248,6 @@ struct ActivityCard: View {
         }
     }
 }
-
-
 #Preview {
     NavigationStack {
         MainPageView()
