@@ -55,5 +55,6 @@ struct TimeUpView: View {
             .cornerRadius(24)
             .padding(.horizontal, 24)
         }
+        .navigationBarBackButtonHidden(true)
     }
 }

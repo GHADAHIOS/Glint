@@ -48,6 +48,7 @@ struct MainPageView: View {
                         .font(.body)
                         .foregroundColor(.black)
                         .bold()
+                    
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 32)
@@ -107,6 +108,7 @@ struct MainPageView: View {
                                 .frame(width: 100, height: 28)
                                 .background(Color.button)
                                 .cornerRadius(14)
+                                .font(.system(size: 20, weight: .medium, design: .rounded))
                         }
                         .padding(.bottom, 0)
                     }
@@ -118,8 +120,9 @@ struct MainPageView: View {
                             .stroke(Color.gray.opacity(0.4), lineWidth: 1)
                     )
 
-                    Text("How long were you daydreaming today?")
+                    Text("     How long were you daydreaming today?")
                         .font(.callout)
+                    
                         .foregroundColor(.black)
                         .padding(.horizontal, 16)
                         .frame(width: 360, height: 34, alignment: .leading)
@@ -138,7 +141,11 @@ struct MainPageView: View {
                         .padding(.horizontal, 32)
 
                     HStack(spacing: 16) {
-                        ActivityCard(title: "5-4-3-2-1 Technique", image: "face", description: "5 Steps | 3–5 min")
+    
+                        NavigationLink(destination: BreathingView()) {
+                            ActivityCard(title: "5-4-3-2-1 Technique", image: "face", description: "5 Steps | 2-5 min")
+                        }
+                        .buttonStyle(PlainButtonStyle())
 
                         NavigationLink(destination: CameraView()) {
                             ActivityCard(title: "Find Colors around you", image: "man", description: "1 Step | 2–3 min")
@@ -203,6 +210,7 @@ struct MainPageView: View {
 
                 Spacer()
             }
+            .navigationBarBackButtonHidden(true)
             .padding(.top, 40)
         }
     }

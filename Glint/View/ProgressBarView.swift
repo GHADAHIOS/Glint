@@ -14,6 +14,7 @@ struct ProgressBarView: View {
                     ForEach(0..<totalSteps - 1, id: \.self) { index in
                         Rectangle()
                             .fill(index < currentStep  ? Color("lightpurple") : Color.gray.opacity(0.3))
+                            .animation(.easeInOut(duration: 0.2), value: currentStep)
                             .frame(height: 2)
                             .frame(maxWidth: .infinity)
                     }
@@ -44,7 +45,7 @@ struct ProgressBarView: View {
                                     .frame(width: 8, height: 8)
                             }
                         }
-
+                        .animation(.easeInOut(duration: 0.3), value: currentStep)
                         if idx < totalSteps - 1 {
                             Spacer()
                         }

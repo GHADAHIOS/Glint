@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-//import EffectsLibrary
+import EffectsLibrary
 struct CompletionView: View {
     var onHome: () -> Void
     var onTryAnother: () -> Void
@@ -18,7 +18,8 @@ struct CompletionView: View {
                 .ignoresSafeArea()
 
             // تأثير الألعاب النارية في الخلفية
-           // FireworksView()
+           //
+            FireworksView()
                 .ignoresSafeArea()
 
             // الكارد الأمامي
@@ -68,5 +69,6 @@ struct CompletionView: View {
             .cornerRadius(24)
             .padding(.horizontal, 24)
         }
+        .navigationBarBackButtonHidden(true)
     }
 }

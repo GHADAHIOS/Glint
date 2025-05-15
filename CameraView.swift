@@ -3,7 +3,7 @@ import SwiftUI
 struct CameraView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var randomColorWord = ""
-    @State private var timeRemaining = 180
+    @State private var timeRemaining = 30
     @State private var matchProgress = 0
     @State private var currentDetectedColor = "..."
     @State private var capturedColor: UIColor? = nil
@@ -112,7 +112,7 @@ struct CameraView: View {
             if showTimesUpPopup {
                 TimesUpPopup(
                     tryAgainAction: {
-                        timeRemaining = 180
+                        timeRemaining = 30
                         matchProgress = 0
                         showTimesUpPopup = false
                         randomColorWord = colorWords.randomElement() ?? "red"
@@ -131,7 +131,7 @@ struct CameraView: View {
                     },
                     onTryAnother: {
                         matchProgress = 0
-                        timeRemaining = 180
+                        timeRemaining = 30
                         randomColorWord = colorWords.randomElement() ?? "red"
                         showCompletionView = false
                     }

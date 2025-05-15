@@ -99,6 +99,19 @@ class GroundingViewModel: ObservableObject {
             currentStepIndex -= 1
         }
     }
+    func bindingForAnswer(stepIndex: Int, itemIndex: Int) -> Binding<String> {
+        return Binding<String>(
+            get: {
+                return self.answers[stepIndex][itemIndex]
+            },
+            set: { newValue in
+                self.answers[stepIndex][itemIndex] = newValue
+            }
+        )
+    }
+
 }
+
+
 
 
